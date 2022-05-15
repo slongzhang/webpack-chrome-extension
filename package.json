@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/slongzhang/webpack-chrome-extension/issues"
   },
-  "homepage": "https://github.com/slongzhang/webpack-chrome-extension#readme"
+  "homepage": "https://github.com/slongzhang/webpack-chrome-extension#readme",
+  "devDependencies": {
+    "webpack": "^3.6.0"
+  }
 }
