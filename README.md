@@ -299,3 +299,44 @@ module.exports = webpackMerge(baseConfig, {
 });
 
 ```
+
+
+## 安装webpack依赖
+
+```basic
+# css样式文件处理依赖
+npm install --save-dev css-loader@2.0.2 style-loader@0.23.1
+
+# 图片和文件处理依赖
+npm install --save-dev url-loader@1.1.2 file-loader@3.0.1
+
+# babel-loader 处理浏览器兼容问题，可以将es6转成es5
+npm install --save-dev babel-loader@7.1.5 babel-core@6.26.3 babel-preset-es2015@6.24.1
+
+# 安装vue解析器(这边按vue2来配置的，如使用vue3或其他框架的请自行修改，如未使用框架的需自行移除配置文件里与vue相关的代码)
+npm install --save-dev vue-loader@13.7.3 vue-template-compiler@2.5.21
+npm install --save vue@2.5.21
+# 注意vue-template-compiler的版本号要和vue的版本号一致才能解析
+
+
+# 打包前清除dist插件（webpack插件）
+npm install --save-dev clean-webpack-plugin@3.0.0
+
+# 拷贝插件
+npm install --save-dev copy-webpack-plugin@4.6.0
+
+# 模板插件
+npm install --save-dev html-webpack-plugin@3.2.0
+
+# 代码压缩插件
+npm install --save-dev uglifyjs-webpack-plugin@1.1.1
+
+# 安装webpack-merge
+npm install --save-dev webpack-merge@4.1.5
+
+# 安装打包脚本
+npm install --save-dev zip-webpack-plugin@2.0.0
+
+# 本地服务端
+npm install --save-dev webpack-dev-server@2.9.3
+```
