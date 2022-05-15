@@ -1,0 +1,1 @@
+console.log('This is contentScripts.js injected here')
