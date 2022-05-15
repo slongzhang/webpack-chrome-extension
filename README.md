@@ -1,11 +1,13 @@
 # webpack-chrome-extension
 
 ## 初始化项目
+
 ```bash
 npm init
 ```
 
 ## 安装webpack@3.6
+
 ```bash
 npm install --save-dev webpack@3.6
 ```
@@ -38,9 +40,7 @@ new-item src/contentScripts/index.js -type file -force -value "console.log('This
 new-item src/options/main.js -type file -force -value "console.log('This is options.js')"
 new-item src/popup/main.js -type file -force -value "console.log('This is popup.js')"
 new-item src/config/config.js
-
 ```
-
 
 ## 创建开发配置config/config.js
 
@@ -52,5 +52,25 @@ const config = {
     prefix: '__ZSL__'
 }
 export default config
-
 ```
+
+## 创建html页面模板
+
+-   根目录下新建index.html
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="author" content="slongzhang@qq.com">
+      <title>webpack-chrome-extension</title>
+    </head>
+    <body>
+      <div id="app">
+      </div>
+    </body>
+    </html>
+    ```
