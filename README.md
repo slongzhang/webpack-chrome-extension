@@ -713,3 +713,37 @@ module.exports = {
     
     export default router
     ```
+
+
+
+## 运行 or 打包
+
+```bash
+# 打包开发版
+npm run dev
+
+# 运行热加载options
+npm run devOptions
+
+# 打包发行版
+npm run build
+
+```
+
+<font color=red>注意： （默认打包mv3规范，如需打包v2则命令后面添加 --MV=2,如 npm run dev --MV=2）</font>
+
+
+
+## 最后总结
+
+- MV3 不再提供document和window接口了，background后台页如需解析html dom对象可安装cheerio解决
+
+- 插件开发过程中，可能会用的的类库推荐(根据自身情况选择安装)
+
+  ```bash
+  # 支持dom解析(可解决background不支持dom的问题)
+  npm install --save cheerio@1.0.0-rc.10
+  
+  # 支持数据压缩和解压
+  npm install --save pako@2.0.4
+  ```
