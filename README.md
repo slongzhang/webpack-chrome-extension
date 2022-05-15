@@ -512,7 +512,6 @@ module.exports = {
 }
 ```
 
-
 ## 配置package.js脚本命令
 
 ```js
@@ -525,54 +524,192 @@ module.exports = {
 
 ![image-20220514233218690](README.assets/image-20220514233218690.png)
 
-
 ## popup和options添加vue框架
 
 ### 配置popup
 
-- src/popup目录下新建App.vue
+-   src/popup目录下新建App.vue
+
+    ```vue
+    <template lang="html">
+      <div class="wrap">
+        <h1>{{message}}</h1>
+      </div>
+    </template>
+    
+    <script>
+    export default {
+      name: 'App',
+      data() {
+        return {
+          message: 'hello popup!'
+        }
+      }
+    }
+    </script>
+    
+    <style lang="css" scoped>
+    .wrap {
+      width: 200px;
+    }
+    h1{
+      color: red;
+    }
+    </style>
+    ```
+
+
+-   编辑src/popup/main.js
+
+    ```js
+    import config from '@src/config/config'
+    import Vue from 'vue'
+    import App from './App.vue'
+    
+    new Vue({
+      el: '#app',
+      render: h => h(App)
+    })
+    ```
+
+### 配置options
+
+- src/optins下新建App.vue
 
   ```vue
   <template lang="html">
-    <div class="wrap">
-      <h1>{{message}}</h1>
+    <div>
+      <router-link to="/Home">首页</router-link>
+      <router-link to="/About">关于</router-link>
+      <router-view></router-view>
     </div>
   </template>
 
   <script>
+
   export default {
     name: 'App',
     data() {
       return {
-        message: 'hello popup!'
+        message: 'hello options'
       }
+    },
+    components: {
     }
   }
   </script>
 
   <style lang="css" scoped>
-  .wrap {
-    width: 200px;
-  }
-  h1{
-    color: red;
-  }
   </style>
-
   ```
 
-
-
-- 编辑src/popup/main.js
+- 编辑src/options/main.js
 
   ```js
   import config from '@src/config/config'
   import Vue from 'vue'
   import App from './App.vue'
+  import router from './router'
 
   new Vue({
     el: '#app',
+    router,
     render: h => h(App)
   })
-
   ```
+
+- 安装vuex 和 vue-router
+
+  ```bash
+  npm install --save vuex@3.0.1 vue-router@3.5.3
+  ```
+
+- 新建vue项目文件和目录
+
+  ```bash
+  # cmd
+  md src\options\common, src\options\components, src\options\router, src\options\store, src\options\views
+
+  # window powerShell下执行
+  mkdir -p src/options/common, src/options/components, src/options/router, src/options/store, src/options/views
+  ```
+
+- 创建两个案例页面
+
+    - 创建src/options/views/Home.vue
+
+        ```vue
+        <template lang="html">
+          <div>
+            <h2>我是home页面</h2>
+            <p>home home home</p>
+          </div>
+        </template>
+        
+        <script>
+        export default {
+          name: 'Home'
+        }
+        </script>
+        
+        <style lang="css" scoped>
+        </style>
+        ```
+    
+    - 创建src/options/views/About.vue
+    
+      ```vue
+      <template lang="html">
+          <div>
+            <h2>我是about页面</h2>
+            <p>about about about</p>
+          </div>
+        </template>
+      
+        <script>
+        export default {
+          name: 'About'
+        }
+        </script>
+      
+        <style lang="css" scoped>
+        </style>
+      ```
+    
+      
+
+
+-   创建路由文件src\\options\\router\\index.js
+
+    ```js
+    // 配置路由相关信息
+    import VueRouter from 'vue-router'
+    import Vue from 'vue'
+    
+    // 1.通过Vue.use(插件)，安装插件
+    Vue.use(VueRouter)
+    
+    // 导入组件
+    import Home from '../views/Home'
+    import About from '../views/About'
+    
+    // 2.创建VueRouter对象
+    const routes = [{
+        path: '',
+        redirect: '/home'
+      },
+      {
+        path: '/home',
+        component: Home
+      }, {
+        path: '/about',
+        component: About
+      }
+    ]
+    const router = new VueRouter({
+      routes,
+      mode: 'history'
+    })
+    
+    export default router
+    ```
