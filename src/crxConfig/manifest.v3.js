@@ -40,7 +40,7 @@ module.exports = {
     // 脚本注入功能
     "scripting"
     // 请求头拦截与修改
-    , 'webRequest', 'webRequestBlocking'
+    , 'webRequest', 'declarativeNetRequest'
   ],
   // 主机域名权限（可以通过executeScript或者insertCSS访问的网站）
   "host_permissions": [
