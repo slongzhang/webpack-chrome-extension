@@ -4,7 +4,9 @@
   "description": "This is a Chrome browser extension developed by webpack and Vue, from the author slongzhang",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --config webpackConfig/dev.js",
+    "devOptions": "webpack-dev-server --config webpackConfig/devOptions.js --open",
+    "build": "webpack --config webpackConfig/build.js"
   },
   "repository": {
     "type": "git",

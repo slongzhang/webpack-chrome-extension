@@ -511,3 +511,16 @@ module.exports = {
   "update_url": "https://clients2.google.com/service/update2/crx"
 }
 ```
+
+
+## 配置package.js脚本命令
+
+```js
+"scripts": {
+    "dev": "webpack --config webpackConfig/dev.js",
+    "devOptions": "webpack-dev-server --config webpackConfig/devOptions.js --open",
+    "build": "webpack --config webpackConfig/build.js"
+  }
+```
+
+![image-20220514233218690](README.assets/image-20220514233218690.png)
