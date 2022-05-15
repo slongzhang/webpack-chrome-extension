@@ -524,3 +524,55 @@ module.exports = {
 ```
 
 ![image-20220514233218690](README.assets/image-20220514233218690.png)
+
+
+## popup和options添加vue框架
+
+### 配置popup
+
+- src/popup目录下新建App.vue
+
+  ```vue
+  <template lang="html">
+    <div class="wrap">
+      <h1>{{message}}</h1>
+    </div>
+  </template>
+
+  <script>
+  export default {
+    name: 'App',
+    data() {
+      return {
+        message: 'hello popup!'
+      }
+    }
+  }
+  </script>
+
+  <style lang="css" scoped>
+  .wrap {
+    width: 200px;
+  }
+  h1{
+    color: red;
+  }
+  </style>
+
+  ```
+
+
+
+- 编辑src/popup/main.js
+
+  ```js
+  import config from '@src/config/config'
+  import Vue from 'vue'
+  import App from './App.vue'
+
+  new Vue({
+    el: '#app',
+    render: h => h(App)
+  })
+
+  ```

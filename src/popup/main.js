@@ -1,1 +1,8 @@
-console.log('This is popup.js')
+import config from '@src/config/config'
+import Vue from 'vue'
+import App from './App.vue'
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+})
