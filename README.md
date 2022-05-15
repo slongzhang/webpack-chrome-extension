@@ -75,14 +75,11 @@ export default config
     </html>
     ```
 
-
-
-
 ## 配置webpack.config
 
 ### 创建webpack.config所需文件
 
-- 根目录下新建webpackConfig文件夹，并创建base.js 、build.js、dev.js、devOptions.js
+-   根目录下新建webpackConfig文件夹，并创建base.js 、build.js、dev.js、devOptions.js
 
 ```bash
 # cmd
@@ -239,7 +236,6 @@ module.exports = {
 }
 ```
 
-
 ### 配置build.js
 
 ```js
@@ -270,19 +266,14 @@ module.exports = webpackMerge({
       })
     ]
   })
-
 ```
-
 
 ### 配置dev.js
 
 ```js
 const baseConfig = require('./base.js');
 module.exports = baseConfig
-
 ```
-
-
 
 ### 配置devOptions.js
 
@@ -297,9 +288,7 @@ module.exports = webpackMerge(baseConfig, {
     inline: true
   }
 });
-
 ```
-
 
 ## 安装webpack依赖
 
@@ -339,4 +328,186 @@ npm install --save-dev zip-webpack-plugin@2.0.0
 
 # 本地服务端
 npm install --save-dev webpack-dev-server@2.9.3
+```
+
+## 创建manifest.json(浏览器开发配置表)
+
+```bash
+# cmd
+type nul>src\crxConfig\manifest.v2.js
+type nul>src\crxConfig\manifest.v3.js
+
+# powerShell
+new-item src/crxConfig/manifest.v2.js
+new-item src/crxConfig/manifest.v3.js
+```
+
+-   manifest.v2.json是chrome浏览器扩展v2版本开发规范，v3则是chrome最新开发规范，新开发的建议直接上手v3
+
+    ![image-20220514145632730](README.assets/image-20220514145632730.png)
+
+-   manifest规范不详细解释介绍，不懂的自己看[chrome文档](https://developer.chrome.com/docs/extensions/mv3/intro/)
+
+### 配置manifest.v2.js
+
+```js
+module.exports = {
+  // 开发规范版本
+  "manifest_version": 2,
+  //  插件名
+  "name": "webpack dev chrome extension MV2",
+  // 插件版本
+  "version": "1.0.0",
+  // 插件描述
+  "description": "a chrome extension with webpack@3.6",
+  // 选项页
+  "options_page": "options/index.html",
+  // 浏览器右上角图标设置， browser_action、page_action、app必选三选一
+  "browser_action": {
+    // // 扩展显示的图标(位于浏览器右上角)
+    // "default_icon": "assets/images/icon48.png",
+    // 鼠标悬停在图标时显示的标题
+    "default_title": "webpack dev chrome extension MV2",
+    // 页面
+    "default_popup": "popup/index.html"
+  },
+  // // 图标
+  // "icons": {
+  //   "16": "assets/images/icon16.png",
+  //   "48": "assets/images/icon48.png",
+  //   "128": "assets/images/icon128.png"
+  // },
+  // 常驻后台js或后台页面
+  "background": {
+    // 2种指定方式，如果指定js,那么会自动生成一个背景页
+    // "page": "background.html"
+    "scripts": ["background/index.js"]
+  },
+  // 权限申请
+  "permissions": [
+    "tabs",
+    // 插件本地存储
+    "storage",
+    // 获取cookie权限
+    "cookies",
+    // 定时器
+    "alarms",
+    // 脚本注入功能
+    "scripting"
+    // 请求头拦截与修改
+    , 'webRequest', 'webRequestBlocking',
+    // 声明所有域名都有访问权限
+    "*://*/*"
+  ],
+  // 允许web与bg通信的域名
+  "externally_connectable": {
+    "matches": [
+      "*://*.slong.ink/*",
+      // 百度(平时调试使用)
+      "*://*.baidu.com/*"
+    ]
+  },
+  // 注入到页面的脚本
+  "content_scripts": [{
+    "matches": [
+      // "*://*.baidu.com/*", // 匹配百度
+      // "http://*/*", // 匹配所有http开头的
+      // "https://*/*", // 匹配所有https开头的
+      "<all_urls>" // 匹配所有
+    ],
+    "js": ["contentScripts/index.js"],
+    "css": [],
+    "run_at": "document_start" // 什么时候执行注入，"document_start"页面打开注入
+  }],
+  // 定义可以被外部访问的文件资源(当前插件的文件资源如图片，脚本，样式等)
+  "web_accessible_resources": [
+
+  ],
+  // 插件主页
+  "homepage_url": "https://www.slong.ink",
+  // 更新地址
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}
+```
+
+### 配置manifest.v3.js
+
+```js
+module.exports = {
+  // 插件开发规范版本
+  "manifest_version": 3,
+  // 插件名
+  "name": "webpack dev chrome extension MV3",
+  // 插件版本号
+  "version": "1.0.1",
+  // 插件描述
+  "description": "a chrome extension with webpack@3.6",
+  // 选项页
+  "options_page": "options/index.html",
+  // 浏览器右上角图标设置，V3:action(V2:browser_action、page_action、app必选三选一)
+  "action": {
+    // // 扩展显示的图标(位于浏览器右上角)
+    // "default_icon": "assets/images/icon48.png",
+    // 鼠标悬停在图标时显示的标题
+    "default_title": "webpack dev chrome extension MV3",
+    // 点击后的页面
+    "default_popup": "popup/index.html"
+  },
+  // // 图标
+  // "icons": {
+  //   "16": "assets/images/icon16.png",
+  //   "48": "assets/images/icon48.png",
+  //   "128": "assets/images/icon128.png"
+  // },
+  // 常驻后台js或后台页面
+  "background": {
+    "service_worker": "background/index.js"
+  },
+  // 权限申请
+  "permissions": [
+    "tabs",
+    // 插件本地存储
+    "storage",
+    // 获取cookie权限
+    "cookies",
+    // 定时器
+    "alarms",
+    // 脚本注入功能
+    "scripting"
+    // 请求头拦截与修改
+    , 'webRequest', 'webRequestBlocking'
+  ],
+  // 主机域名权限（可以通过executeScript或者insertCSS访问的网站）
+  "host_permissions": [
+    "*://*/*"
+  ],
+  // 允许web与bg通信的域名（注意这里不支持泛域名）
+  "externally_connectable": {
+    "matches": [
+      "*://*.slong.ink/*",
+      // 百度(平时调试使用)
+      "*://*.baidu.com/*"
+    ]
+  },
+  // 注入到页面的脚本
+  "content_scripts": [{
+    "matches": [
+      // "*://*.baidu.com/*", // 匹配百度
+      // "http://*/*", // 匹配所有http开头的
+      // "https://*/*", // 匹配所有https开头的
+      "<all_urls>" // 匹配所有
+    ],
+    "js": ["contentScripts/index.js"],
+    "css": [],
+    "run_at": "document_start" // 什么时候执行注入，"document_start"页面打开注入
+  }],
+  // 定义可以被外部访问的文件资源(当前插件的文件资源如图片，脚本，样式等)
+  "web_accessible_resources": [
+
+  ],
+  // 插件主页
+  "homepage_url": "https://www.slong.ink",
+  // 更新地址
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}
 ```
