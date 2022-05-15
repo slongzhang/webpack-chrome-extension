@@ -536,7 +536,7 @@ module.exports = {
         <h1>{{message}}</h1>
       </div>
     </template>
-    
+
     <script>
     export default {
       name: 'App',
@@ -547,7 +547,7 @@ module.exports = {
       }
     }
     </script>
-    
+
     <style lang="css" scoped>
     .wrap {
       width: 200px;
@@ -565,7 +565,7 @@ module.exports = {
     import config from '@src/config/config'
     import Vue from 'vue'
     import App from './App.vue'
-    
+
     new Vue({
       el: '#app',
       render: h => h(App)
@@ -645,19 +645,19 @@ module.exports = {
             <p>home home home</p>
           </div>
         </template>
-        
+
         <script>
         export default {
           name: 'Home'
         }
         </script>
-        
+
         <style lang="css" scoped>
         </style>
         ```
-    
+
     - 创建src/options/views/About.vue
-    
+
       ```vue
       <template lang="html">
           <div>
@@ -665,18 +665,18 @@ module.exports = {
             <p>about about about</p>
           </div>
         </template>
-      
+
         <script>
         export default {
           name: 'About'
         }
         </script>
-      
+
         <style lang="css" scoped>
         </style>
       ```
-    
-      
+
+
 
 
 -   创建路由文件src\\options\\router\\index.js
@@ -685,14 +685,14 @@ module.exports = {
     // 配置路由相关信息
     import VueRouter from 'vue-router'
     import Vue from 'vue'
-    
+
     // 1.通过Vue.use(插件)，安装插件
     Vue.use(VueRouter)
-    
+
     // 导入组件
     import Home from '../views/Home'
     import About from '../views/About'
-    
+
     // 2.创建VueRouter对象
     const routes = [{
         path: '',
@@ -710,7 +710,7 @@ module.exports = {
       routes,
       mode: 'history'
     })
-    
+
     export default router
     ```
 
@@ -722,7 +722,7 @@ module.exports = {
 # 打包开发版
 npm run dev
 
-# 运行热加载options
+# 运行热加载options(暂时有bug，修复待定)
 npm run devOptions
 
 # 打包发行版
@@ -743,7 +743,7 @@ npm run build
   ```bash
   # 支持dom解析(可解决background不支持dom的问题)
   npm install --save cheerio@1.0.0-rc.10
-  
+
   # 支持数据压缩和解压
   npm install --save pako@2.0.4
   ```
