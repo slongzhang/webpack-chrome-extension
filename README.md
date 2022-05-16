@@ -722,7 +722,7 @@ module.exports = {
 # 打包开发版
 npm run dev
 
-# 运行热加载options(暂时有bug，修复待定)
+# 运行热加载options
 npm run devOptions
 
 # 打包发行版
