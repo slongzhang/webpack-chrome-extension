@@ -10,7 +10,7 @@ const {
 
 // 判断打包的版本
 let manifestVersion = process.env.npm_config_MV;
-if (manifestVersion && trim(manifestVersion) == 2) {
+if (manifestVersion && parseInt(manifestVersion) === 2) {
   manifestVersion = 2;
 } else {
   manifestVersion = 3;
